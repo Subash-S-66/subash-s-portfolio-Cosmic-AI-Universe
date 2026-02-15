@@ -3,6 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import gsap from 'gsap'
 import { personalInfo, navItems } from '../data/personal'
 
+const portfolioThemes = [
+  { label: 'Neural Network Theme', url: 'http://subash-dev-portfolio.zeabur.app/' },
+  { label: 'Cosmic Universe Theme', url: 'http://subash-s-portfolio.zeabur.app/' },
+  { label: 'Game Theme', url: 'http://subash--portfolio.zeabur.app/' },
+]
 /* ═══════════════════════════════════════════════════════════════
  *  NAVBAR — Cosmic Navigation
  *  Scroll-aware, text scramble hover, holographic progress bar,
@@ -35,6 +40,8 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('home')
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [themeDropdownOpen, setThemeDropdownOpen] = useState(false)
+  const [mobileThemeOpen, setMobileThemeOpen] = useState(false)
   const navRef = useRef(null)
 
   /* ── Scroll handling ── */
@@ -67,6 +74,8 @@ const Navbar = () => {
   const handleNavClick = useCallback((e, href) => {
     e.preventDefault()
     setMobileOpen(false)
+    setMobileThemeOpen(false)
+    setThemeDropdownOpen(false)
     const id = href.replace('#', '')
     const el = document.getElementById(id)
     if (el) {
@@ -117,11 +126,75 @@ const Navbar = () => {
                 />
               )
             })}
+            <a
+              href={personalInfo.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-lg border border-cosmic-blue/20 bg-cosmic-blue/[0.05] text-[10px] tracking-wide text-white/70 hover:text-white hover:border-cosmic-blue/40 hover:bg-cosmic-blue/[0.12] transition-all duration-300 whitespace-nowrap"
+            >
+              Resume
+            </a>
+            <div className="mx-2 h-4 w-px bg-white/15" />
+            <div
+              className="relative"
+              onMouseEnter={() => setThemeDropdownOpen(true)}
+              onMouseLeave={() => setThemeDropdownOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setThemeDropdownOpen(prev => !prev)}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-cosmic-violet/20 bg-cosmic-violet/[0.05] text-[10px] tracking-wide text-white/70 hover:text-white hover:border-cosmic-violet/40 hover:bg-cosmic-violet/[0.12] transition-all duration-300"
+                aria-haspopup="true"
+                aria-expanded={themeDropdownOpen}
+              >
+                portfolios
+                <motion.span
+                  animate={{ rotate: themeDropdownOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="inline-flex"
+                >
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </motion.span>
+              </button>
+              <AnimatePresence>
+                {themeDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute top-full right-0 mt-2 w-56 rounded-xl border border-white/10 bg-void-deep/95 backdrop-blur-xl shadow-[0_12px_30px_rgba(0,0,0,0.35)] p-2 z-50"
+                  >
+                    {portfolioThemes.map((theme, i) => (
+                      <motion.a
+                        key={theme.label}
+                        href={theme.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setThemeDropdownOpen(false)}
+                        initial={{ opacity: 0, x: 8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.04 }}
+                        className="block px-3 py-2 rounded-lg text-xs tracking-wide text-white/75 hover:text-white hover:bg-cosmic-violet/[0.12] transition-all duration-200"
+                      >
+                        {theme.label}
+                      </motion.a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Mobile Toggle */}
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={() => {
+              const nextOpen = !mobileOpen
+              setMobileOpen(nextOpen)
+              if (!nextOpen) setMobileThemeOpen(false)
+            }}
             className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 relative z-50"
             aria-label="Toggle menu"
           >
@@ -161,7 +234,10 @@ const Navbar = () => {
           >
             <div
               className="absolute inset-0 bg-void/90 backdrop-blur-2xl"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                setMobileOpen(false)
+                setMobileThemeOpen(false)
+              }}
             />
             <motion.div
               initial={{ x: '100%' }}
@@ -189,6 +265,74 @@ const Navbar = () => {
                   </motion.a>
                 )
               })}
+
+              <motion.a
+                href={personalInfo.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  setMobileOpen(false)
+                  setMobileThemeOpen(false)
+                }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.35 }}
+                className="inline-flex px-3 py-2 rounded-lg border border-cosmic-blue/20 bg-cosmic-blue/[0.06] text-sm text-white/75 hover:text-white hover:border-cosmic-blue/40 hover:bg-cosmic-blue/[0.12] transition-all"
+              >
+                Resume
+              </motion.a>
+
+              <div className="mt-4 pt-4 border-t border-white/10 w-full">
+                <button
+                  type="button"
+                  onClick={() => setMobileThemeOpen(prev => !prev)}
+                  className="w-full inline-flex items-center justify-between px-3 py-2 rounded-lg border border-cosmic-violet/20 bg-cosmic-violet/[0.06] text-sm text-white/75 hover:text-white hover:border-cosmic-violet/40 hover:bg-cosmic-violet/[0.12] transition-all"
+                  aria-expanded={mobileThemeOpen}
+                >
+                  Themes
+                  <motion.span
+                    animate={{ rotate: mobileThemeOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="inline-flex"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </motion.span>
+                </button>
+                <AnimatePresence>
+                  {mobileThemeOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden mt-3"
+                    >
+                      <div className="space-y-2">
+                        {portfolioThemes.map((theme, i) => (
+                          <motion.a
+                            key={theme.label}
+                            href={theme.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => {
+                              setMobileOpen(false)
+                              setMobileThemeOpen(false)
+                            }}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.05 }}
+                            className="block px-3 py-2 rounded-lg border border-white/10 text-sm text-white/70 hover:text-white hover:bg-cosmic-violet/[0.12] hover:border-cosmic-violet/30 transition-all"
+                          >
+                            {theme.label}
+                          </motion.a>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
           </motion.div>
         )}
@@ -227,3 +371,4 @@ function NavLink({ item, isActive, onClick }) {
 }
 
 export default Navbar
+

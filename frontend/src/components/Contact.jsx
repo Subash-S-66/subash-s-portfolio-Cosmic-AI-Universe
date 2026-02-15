@@ -2,6 +2,11 @@ import React, { useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { contactInfo, socialLinks } from '../data/personal'
 import { API_ENDPOINTS } from '../config/api'
+const portfolioThemes = [
+  { label: 'Neural Network Theme', url: 'http://subash-dev-portfolio.zeabur.app/' },
+  { label: 'Cosmic Universe Theme', url: 'http://subash-s-portfolio.zeabur.app/' },
+  { label: 'Game Theme', url: 'http://subash--portfolio.zeabur.app/' },
+]
 
 /* ═══════════════════════════════════════════════════════════════
  *  CONTACT — AI Communication Portal
@@ -366,7 +371,31 @@ const Contact = () => {
                   )
                 })}
               </div>
+            </div>
 
+            {/* Portfolio Theme Switcher */}
+            <div className="pt-2">
+              <p className="text-[10px] font-mono text-white/45 uppercase tracking-widest mb-4">
+                Portfolio Themes
+              </p>
+              <div className="flex flex-col gap-3">
+                {portfolioThemes.map((theme, i) => (
+                  <motion.a
+                    key={theme.label}
+                    href={theme.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.65 + i * 0.07 }}
+                    whileHover={{ x: 5 }}
+                    className="w-fit px-4 py-2 rounded-lg border border-cosmic-violet/20 bg-cosmic-violet/[0.05] text-sm text-white/75 hover:text-white hover:border-cosmic-violet/40 hover:bg-cosmic-violet/[0.09] transition-all duration-300"
+                  >
+                    {theme.label}
+                  </motion.a>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -487,3 +516,4 @@ const Contact = () => {
 }
 
 export default Contact
+
