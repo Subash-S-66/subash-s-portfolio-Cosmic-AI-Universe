@@ -2,6 +2,9 @@
 FROM node:18-alpine AS build
 WORKDIR /src
 
+# Ensure devDependencies (vite, postcss, tailwindcss) are installed
+ENV NODE_ENV=development
+
 # Copy root package files
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund && npm i @rollup/rollup-linux-x64-musl --no-save
@@ -12,6 +15,9 @@ COPY frontend ./frontend
 # Allow passing API base during build
 ARG VITE_API_BASE
 ENV VITE_API_BASE=${VITE_API_BASE}
+
+# Verify vite is present before building
+RUN ls node_modules/vite/bin/vite.js
 
 # Build frontend
 RUN cd frontend && node ../node_modules/vite/bin/vite.js build
