@@ -38,15 +38,15 @@ app.use(helmet({
         "'self'",
         "'unsafe-inline'",
         "https://fonts.googleapis.com",
-        process.env.CLIENT_URL || 'https://subash-portfolio.zeabur.app',
-        process.env.ZEABUR_URL || 'https://subash-portfolio.zeabur.app',
+        process.env.CLIENT_URL || 'https://subash-dev-portfolio.zeabur.app',
+        process.env.ZEABUR_URL || 'https://subash-dev-portfolio.zeabur.app',
         process.env.GITHUB_PAGES_URL || 'https://subash-s-66.github.io'
       ],
       styleSrcElem: [
         "'self'",
         "https://fonts.googleapis.com",
-        process.env.CLIENT_URL || 'https://subash-portfolio.zeabur.app',
-        process.env.ZEABUR_URL || 'https://subash-portfolio.zeabur.app',
+        process.env.CLIENT_URL || 'https://subash-dev-portfolio.zeabur.app',
+        process.env.ZEABUR_URL || 'https://subash-dev-portfolio.zeabur.app',
         process.env.GITHUB_PAGES_URL || 'https://subash-s-66.github.io'
       ],
       // Allow scripts from self; keep unsafe-inline/eval to support some libs if needed
@@ -55,8 +55,8 @@ app.use(helmet({
       // Allow API connections from the app origin (Zeabur) and any configured API URL
       connectSrc: [
         "'self'",
-        process.env.API_URL || process.env.CLIENT_URL || process.env.ZEABUR_URL || 'https://subash-portfolio.zeabur.app',
-        process.env.ZEABUR_URL || 'https://subash-portfolio.zeabur.app'
+        process.env.API_URL || process.env.CLIENT_URL || process.env.ZEABUR_URL || 'https://subash-dev-portfolio.zeabur.app',
+        process.env.ZEABUR_URL || 'https://subash-dev-portfolio.zeabur.app'
       ],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       objectSrc: ["'none'"],
@@ -67,9 +67,9 @@ app.use(helmet({
 }))
 app.use(cors({
   origin: [
-    process.env.CLIENT_URL || 'https://subash-s-66.github.io/Subash-Portfolio',
+    process.env.CLIENT_URL || 'https://subash-dev-portfolio.zeabur.app',
     'https://subash-s-66.github.io',
-    process.env.ZEABUR_URL || 'https://subash-portfolio.zeabur.app'
+    process.env.ZEABUR_URL || 'https://subash-dev-portfolio.zeabur.app'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
