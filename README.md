@@ -1,10 +1,6 @@
 <div align="center">
 
-# 🌌 Subash S — Cosmic AI Universe Portfolio
-
-**A full-stack developer portfolio built with React, Three.js, and a cosmic dark theme**
-
-[![Live Demo](https://img.shields.io/badge/Live-Demo-8b5cf6?style=for-the-badge&logo=vercel&logoColor=white)](https://subash.zeabur.app)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-8b5cf6?style=for-the-badge&logo=vercel&logoColor=white)](https://subash-dev-portfolio.zeabur.app)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev)
 [![Three.js](https://img.shields.io/badge/Three.js-0.160-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
