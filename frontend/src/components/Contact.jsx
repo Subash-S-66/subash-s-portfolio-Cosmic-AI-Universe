@@ -3,9 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { contactInfo, socialLinks } from '../data/personal'
 import { API_ENDPOINTS } from '../config/api'
 const portfolioThemes = [
-  { label: 'Neural Network Theme', url: 'http://subash-dev-portfolio.zeabur.app/' },
-  { label: 'Cosmic Universe Theme', url: 'http://subash-s-portfolio.zeabur.app/' },
+  { label: 'Cosmic Universe Theme', url: 'http://subash-dev-portfolio.zeabur.app/' },
+  { label: 'Neural Network Theme', url: 'http://subash-s-portfolio.zeabur.app/' },
   { label: 'Game Theme', url: 'http://subash--portfolio.zeabur.app/' },
+  { label: 'Regular Theme', url: 'https://subash-portfolio.zeabur.app/' },
 ]
 
 /* ═══════════════════════════════════════════════════════════════
@@ -516,4 +517,5 @@ const Contact = () => {
 }
 
 export default Contact
+
 

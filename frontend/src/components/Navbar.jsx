@@ -4,9 +4,10 @@ import gsap from 'gsap'
 import { personalInfo, navItems } from '../data/personal'
 
 const portfolioThemes = [
-  { label: 'Neural Network Theme', url: 'http://subash-dev-portfolio.zeabur.app/' },
-  { label: 'Cosmic Universe Theme', url: 'http://subash-s-portfolio.zeabur.app/' },
+  { label: 'Cosmic Universe Theme', url: 'http://subash-dev-portfolio.zeabur.app/' },
+  { label: 'Neural Network Theme', url: 'http://subash-s-portfolio.zeabur.app/' },
   { label: 'Game Theme', url: 'http://subash--portfolio.zeabur.app/' },
+  { label: 'Regular Theme', url: 'https://subash-portfolio.zeabur.app/' },
 ]
 /* ═══════════════════════════════════════════════════════════════
  *  NAVBAR — Cosmic Navigation
@@ -371,4 +372,5 @@ function NavLink({ item, isActive, onClick }) {
 }
 
 export default Navbar
+
 
