@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank you for contacting Subash</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #08080f; }
+    .wrapper { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .container { background-color: #0e0e1a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(139,92,246,0.15); }
+    .header { background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%); padding: 44px 30px; text-align: center; }
+    .header h1 { margin: 0; font-size: 26px; font-weight: 700; color: #ffffff; letter-spacing: 0.5px; }
+    .header p { margin: 12px 0 0 0; font-size: 14px; color: rgba(255,255,255,0.85); letter-spacing: 0.3px; }
+    .header .mono-tag { display: inline-block; margin-top: 16px; padding: 4px 14px; border-radius: 20px; background: rgba(255,255,255,0.12); font-size: 10px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+    .content { padding: 36px 30px; }
+    .card { background-color: #13132a; border: 1px solid rgba(139,92,246,0.12); border-radius: 12px; padding: 22px; margin: 18px 0; }
+    .card h3, .card h4 { margin: 0 0 12px 0; font-size: 15px; font-weight: 600; }
+    .card-violet h3, .card-violet h4 { color: #a78bfa; }
+    .card-blue h3, .card-blue h4 { color: #60a5fa; }
+    .card-cyan h3, .card-cyan h4 { color: #22d3ee; }
+    .card p { margin: 6px 0; color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; }
+    .card strong { color: rgba(255,255,255,0.8); }
+    .card .label { font-size: 10px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 10px; display: block; }
+    .message-text { color: rgba(255,255,255,0.55); line-height: 1.7; white-space: pre-line; font-size: 14px; }
+    .accent-line { width: 40px; height: 2px; background: linear-gradient(90deg, #8b5cf6, #3b82f6); border-radius: 2px; margin-bottom: 14px; }
+    .contact-links { margin: 16px 0 0 0; }
+    .contact-links a { display: inline-block; margin: 5px 8px 5px 0; padding: 10px 20px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+    .divider { border: none; border-top: 1px solid rgba(139,92,246,0.1); margin: 28px 0; }
+    .closing { color: rgba(255,255,255,0.5); text-align: center; margin: 24px 0 8px 0; font-size: 14px; }
+    .footer { background-color: #09091a; padding: 28px 30px; text-align: center; border-top: 1px solid rgba(139,92,246,0.08); }
+    .footer .name { font-size: 16px; font-weight: 600; background: linear-gradient(90deg, #8b5cf6, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0 0 6px 0; }
+    .footer .role { margin: 0 0 4px 0; font-size: 13px; color: rgba(255,255,255,0.45); }
+    .footer .social-links { margin: 14px 0; }
+    .footer .social-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; margin: 0 6px; transition: color 0.2s; }
+    .footer .social-links .sep { color: rgba(255,255,255,0.15); margin: 0 4px; }
+    .footer .auto-note { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 16px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; letter-spacing: 0.5px; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>Thank You for Reaching Out!</h1>
+        <p>I've received your message and appreciate you taking the time to connect.</p>
+        <span class="mono-tag">Signal Received</span>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <div class="card card-violet">
+          <span class="label">Transmission Log</span>
+          <div class="accent-line"></div>
+          <h3>Message Summary</h3>
+          <p><strong>Subject:</strong> {{subject}}</p>
+          <p><strong>Received:</strong> {{date}}</p>
+        </div>
+
+        <div class="card card-blue">
+          <span class="label">Message Contents</span>
+          <div class="accent-line"></div>
+          <h4>Your Message</h4>
+          <div class="message-text">{{message}}</div>
+        </div>
+
+        <div class="card card-cyan">
+          <span class="label">Response ETA</span>
+          <div class="accent-line"></div>
+          <h4>Response Time</h4>
+          <p>I typically respond to all messages within 24-48 hours. For urgent inquiries, feel free to follow up on this email.</p>
+        </div>
+
+        <div class="card card-violet">
+          <span class="label">Alternate Channels</span>
+          <div class="accent-line"></div>
+          <h4>Alternative Ways to Connect</h4>
+          <p>While you wait for my response, you can also reach me through:</p>
+          <div class="contact-links">
+            <a href="https://www.linkedin.com/in/subash-s-514aa9373" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Subash-S-66" target="_blank">GitHub</a>
+            <a href="mailto:subash.93450@gmail.com">Direct Email</a>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <p class="closing">Looking forward to connecting with you soon!</p>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p class="name">Subash S</p>
+        <p class="role">Full Stack Developer &bull; B.Tech Computer Science</p>
+        <p class="role">Dr. M.G.R. Educational and Research Institute, Chennai</p>
+        <div class="social-links">
+          <a href="https://github.com/Subash-S-66" target="_blank">GitHub</a>
+          <span class="sep">&bull;</span>
+          <a href="https://www.linkedin.com/in/subash-s-514aa9373" target="_blank">LinkedIn</a>
+          <span class="sep">&bull;</span>
+          <a href="mailto:subash.93450@gmail.com">Email</a>
+        </div>
+        <p class="auto-note">// automated response &mdash; do not reply directly</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
