@@ -108,7 +108,7 @@ const Navbar = () => {
             onClick={(e) => handleNavClick(e, '#home')}
             className="text-lg font-bold tracking-wide text-white/90 hover:text-cosmic-violet transition-colors group"
           >
-            <span className="text-gradient-cosmic">{personalInfo.name?.split(' ')[0] || 'Portfolio'}</span>
+            <span className="text-gradient-cosmic">{personalInfo.name?.split(' ').slice(0, 2).join(' ') || 'Subash S'}</span>
             <span className="text-white/60 font-light ml-1">.</span>
           </a>
 
@@ -130,7 +130,7 @@ const Navbar = () => {
               href={personalInfo.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-lg border border-cosmic-blue/20 bg-cosmic-blue/[0.05] text-[10px] tracking-wide text-white/70 hover:text-white hover:border-cosmic-blue/40 hover:bg-cosmic-blue/[0.12] transition-all duration-300 whitespace-nowrap"
+              className="px-3 py-1.5 rounded-lg border border-cosmic-blue/20 bg-cosmic-blue/[0.05] text-sm tracking-wide text-white/70 hover:text-white hover:border-cosmic-blue/40 hover:bg-cosmic-blue/[0.12] transition-all duration-300 whitespace-nowrap"
             >
               Resume
             </a>
@@ -143,11 +143,11 @@ const Navbar = () => {
               <button
                 type="button"
                 onClick={() => setThemeDropdownOpen(prev => !prev)}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-cosmic-violet/20 bg-cosmic-violet/[0.05] text-[10px] tracking-wide text-white/70 hover:text-white hover:border-cosmic-violet/40 hover:bg-cosmic-violet/[0.12] transition-all duration-300"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-cosmic-violet/20 bg-cosmic-violet/[0.05] text-sm tracking-wide text-white/70 hover:text-white hover:border-cosmic-violet/40 hover:bg-cosmic-violet/[0.12] transition-all duration-300"
                 aria-haspopup="true"
                 aria-expanded={themeDropdownOpen}
               >
-                portfolios
+                Portfolios
                 <motion.span
                   animate={{ rotate: themeDropdownOpen ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
