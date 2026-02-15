@@ -475,26 +475,49 @@ app.post('/api/contact',
       // Where to send the admin notification
       const notificationEmail = process.env.EMAIL_TO || process.env.NOTIFICATION_EMAIL || 'subash.93450@gmail.com'
 
-      // Send notification to admin using SMTP if configured, otherwise try Resend
+      // Deliver with SMTP first, then fallback to Resend.
+      // Never fail the form with 500 only because provider delivery failed.
+      const deliveryErrors = []
+      let delivered = false
+
       if (usingSMTP) {
-        // Send notification to admin
-        await sendEmailWithSMTP(notificationEmail, `Portfolio Contact: ${subject}`, mainEmailHtml, email)
-        // Send auto-reply to sender via SMTP (not third-party)
         try {
-          await sendEmailWithSMTP(email, `Thank you for contacting me - ${subject}`, autoReplyHtml, notificationEmail)
+          await sendEmailWithSMTP(notificationEmail, `Portfolio Contact: ${subject}`, mainEmailHtml, email)
+          delivered = true
+          try {
+            await sendEmailWithSMTP(email, `Thank you for contacting me - ${subject}`, autoReplyHtml, notificationEmail)
+          } catch (err) {
+            console.warn('Auto-reply failed (SMTP):', err.message)
+          }
         } catch (err) {
-          console.warn('Auto-reply failed (SMTP):', err.message)
+          deliveryErrors.push(`SMTP: ${err.message}`)
+          console.error('Primary SMTP delivery failed:', err.message)
         }
-      } else if (process.env.RESEND_API_KEY) {
-        // Send notification via Resend (only admin, no auto-reply to avoid third-party for sender)
-        await sendEmailWithResend(notificationEmail, `Portfolio Contact: ${subject}`, mainEmailHtml, email)
-        console.log('Auto-reply not sent to sender (Resend is third-party service)')
-      } else {
-        console.log('No email service configured. Message received but not sent via email.')
-        console.log('Name:', name, 'Email:', email, 'Subject:', subject, 'Message:', message)
       }
 
-      res.json({
+      if (!delivered && process.env.RESEND_API_KEY) {
+        try {
+          await sendEmailWithResend(notificationEmail, `Portfolio Contact: ${subject}`, mainEmailHtml, email)
+          delivered = true
+          console.log('Auto-reply not sent to sender (Resend is third-party service)')
+        } catch (err) {
+          deliveryErrors.push(`Resend: ${err.message}`)
+          console.error('Fallback Resend delivery failed:', err.message)
+        }
+      }
+
+      if (!delivered) {
+        console.error('All delivery methods failed. Contact payload logged for manual follow-up.')
+        console.error('Delivery errors:', deliveryErrors.join(' | ') || 'none')
+        console.log('Name:', name, 'Email:', email, 'Subject:', subject, 'Message:', message)
+
+        return res.status(202).json({
+          success: true,
+          message: 'Message received, but email delivery is temporarily unavailable. Please also contact me directly via email/LinkedIn.'
+        })
+      }
+
+      return res.json({
         success: true,
         message: 'Message received! I\'ll get back to you soon.'
       })
